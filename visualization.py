@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 
 
 def plot_accuracy(history):
-    """Trace accuracy et val_accuracy à partir de l'history Keras."""
     acc = history.history["accuracy"]
     val_acc = history.history["val_accuracy"]
 
@@ -16,3 +15,4 @@ def plot_accuracy(history):
     plt.grid(True)
     plt.tight_layout()
     plt.show()
+
