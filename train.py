@@ -1,18 +1,3 @@
-"""
-train.py
-
-Boucle d'entraînement pour la classification de textes avec un RNN.
-
-Le modèle (architecture + compilation) est défini dans le notebook.
-Ici on gère :
-- les seeds
-- le chargement du corpus
-- la création des tf.data.Dataset
-- l'adaptation du TextVectorization
-- les callbacks
-- la boucle model.fit / evaluate
-"""
-
 from __future__ import annotations
 
 import os
@@ -54,39 +39,16 @@ def train_text_classification_model(
 ) -> tuple[tf.keras.callbacks.History, float]:
     """Entraîne et évalue un modèle de classification de textes.
 
-    Parameters
-    ----------
+    Paramètres :
     model : tf.keras.Model
-        Modèle Keras déjà compilé.
+        Modèle Keras défini dans le corps du notebook marimo.
         On suppose que la première couche est un TextVectorization
         compatible avec `vectorizer`.
     vectorizer : tf.keras.layers.TextVectorization
         La couche de vectorisation utilisée dans le modèle
-        (elle sera adaptée sur le texte d'entraînement).
+
     max_seq_len : int
         Longueur maximale de séquence utilisée pour construire le modèle
-        (uniquement pour l'affichage/logs).
-    data_dir : str, default DEFAULT_DATA_DIR
-        Dossier racine du corpus.
-    outdir : str, default DEFAULT_OUTDIR
-        Dossier de sortie pour les runs/logs (créé si nécessaire).
-    val_split : float, default DEFAULT_VAL_SPLIT
-        Proportion du corpus utilisée pour la validation.
-    batch_size : int, default DEFAULT_BATCH_SIZE
-        Taille de batch.
-    epochs : int, default DEFAULT_EPOCHS
-        Nombre maximum d'époques.
-    patience : int, default DEFAULT_PATIENCE
-        Patience pour l'early stopping (en nombre d'époques).
-    seed : int, default DEFAULT_SEED
-        Graine aléatoire pour la reproductibilité.
-
-    Returns
-    -------
-    history : keras.callbacks.History
-        L'historique renvoyé par model.fit.
-    val_accuracy : float
-        Accuracy de validation finale.
     """
     # Pour isoler les runs
     tf.keras.backend.clear_session()
@@ -155,3 +117,4 @@ def train_text_classification_model(
     print(f"MAX_SEQ_LEN={max_seq_len} | Validation Accuracy: {val_acc:.4f}")
 
     return history, float(val_acc)
+
